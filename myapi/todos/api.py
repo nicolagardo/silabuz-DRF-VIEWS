@@ -128,4 +128,6 @@ class TodoViewSetCustom(viewsets.ModelViewSet):
         return Response(status=status.HTTP_200_OK)
 
 
-
+class TodoViewSet(viewsets.ModelViewSet):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
