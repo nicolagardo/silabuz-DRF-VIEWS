@@ -1,4 +1,6 @@
-from rest_framework.routers import Route, SimpleRouter
+from rest_framework.routers import Route, SimpleRouter, DefaultRouter
+from rest_framework import routers
+
 
 class CustomRouter(SimpleRouter):
     routes = [
@@ -15,19 +17,5 @@ class CustomRouter(SimpleRouter):
             name = '{basename}-detail',
             detail = True,
             initkwargs= {'suffix':'Detail'}
-        ),
-        Route(
-            url = r'^{prefix}$',
-            mapping = {'post':'post'},
-            name = '{basename}-create',
-            detail = True,
-            initkwargs= {'suffix':'Create'}
-        ),
-        Route(
-            url = r'^{prefix}$',
-            mapping = {'put':'put'},
-            name = '{basename}-update',
-            detail = True,
-            initkwargs= {'suffix':'Update'}
-        ),
+        )
     ]
