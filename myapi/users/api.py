@@ -1,15 +1,15 @@
 from django.contrib.auth import authenticate
 
 
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework import mixins
 from rest_framework import generics
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .serializer import UserSerializer, SignUpSerializer
-from .models import Users
+from .serializer import UserSerializer, SignUpSerializer, GetUserSerializer
+from .models import Users, User
 from .tokens import create_jwt_pair_for_user
 
 
@@ -55,9 +55,9 @@ class SignUpView(generics.GenericAPIView):
             return Response(
                 {"message":"El usuario se creó correctamente",
                   "data":ser.data},
-                status=201
+                status= status.HTTP_201_CREATED
             )
-        return Response(data= ser.errors, status=400)
+        return Response(data= ser.errors, status= status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(APIView):
@@ -70,19 +70,20 @@ class LoginView(APIView):
 
         if user is not None:
             tokens = create_jwt_pair_for_user(user)
-
-            return Response(
-                {"message":"Logeado correctamente",
+            resp = {"message":"Logeado correctamente",
                  "email": email,
                  "tokens": tokens
                  }
-                )
+            return Response(data = resp, status=status.HTTP_200_OK)
         else: return Response(
-            {"message": "Correo inválido o contraseña incorrecta"}
+            data={"message": "Correo inválido o contraseña incorrecta"}
             )
 
     def get(self, request: Request):
         content = {"user": str(request.user), "auth": str(request.auth)}
-        return Response(data= content, status=200)
+        return Response(data= content, status=status.HTTP_200_OK)
 
 
+class GetUsers(viewsets.ReadOnlyModelViewSet):
+    serializer_class = GetUserSerializer
+    queryset = User.objects.all()

@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # "django.contrib.admin",
+    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "todos",
     "rest_framework",
-    "users"
+    "users",
+    "rest_framework_simplejwt",
+    "rest_framework.authtoken"
 ]
 
 MIDDLEWARE = [
@@ -92,7 +94,7 @@ MYSQL = {
     }
 }
 
-DATABASES = SQLITE3
+DATABASES = MYSQL
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -140,5 +142,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 #     'PAGE_SIZE': 5
 
 # }
+AUTH_USER_MODEL = 'users.User'
+
 
 repo = "https://github.com/nicolagardo/silabuz-DRF-VIEWS"

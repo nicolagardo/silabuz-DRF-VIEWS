@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from rest_framework.validators import ValidationError
-from .models import Users
+from .models import Users, User
 from django.urls import path
 
 class UserSerializer(serializers.ModelSerializer):
@@ -17,11 +17,11 @@ class SignUpSerializer(serializers.ModelSerializer):
     password = serializers.CharField(min_length= 8, write_only= True)
 
     class Meta:
-        model = Users
+        model = User
         fields= ["email", "username", "password"]
 
     def validate(self, attrs):
-        is_email_exists = Users.objects.filter(email=attrs["email"]).exists()
+        is_email_exists = User.objects.filter(email=attrs["email"]).exists()
         if is_email_exists:
             raise ValidationError("El email ya ha sido usado")
         return super().validate(attrs)
@@ -42,5 +42,5 @@ class GetUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(min_length= 8, write_only= True)
     
     class meta:
-        model = Users
+        model = User
         fields = fields= ["email", "username", "password"]
