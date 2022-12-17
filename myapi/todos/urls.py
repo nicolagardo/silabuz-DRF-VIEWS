@@ -26,8 +26,8 @@ urlpatterns = [
     # path('/todos/update/<int:pk>', TodoViewSetCustom.as_view({'put': 'update'})),
     # path('/v2/todos', TodoViewSet.as_view())
 
-    re_path('/v3/', include(api_v3)),
-    re_path('/v4/', include(api_v4)),
+    # re_path('/v3/', include(api_v3)),
+    # re_path('/v4/', include(api_v4)),
     
 
 ]

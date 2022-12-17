@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     "rest_framework",
     "users",
     "rest_framework_simplejwt",
-    "rest_framework.authtoken"
+    "rest_framework.authtoken",
+    "drf_yasg",
+    'drf_spectacular',
+    "payments"
+
 ]
 
 MIDDLEWARE = [
@@ -136,13 +140,25 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# REST_FRAMEWORK = {
-#     # ...
-#     'DEFAULT_PAGINATION_CLASS': 'myapi.myapi.core.pagination.LinkHeaderPagination',
-#     'PAGE_SIZE': 5
+REST_FRAMEWORK = {
+     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    # ...
+    # 'DEFAULT_PAGINATION_CLASS': 'myapi.myapi.core.pagination.LinkHeaderPagination',
+    # 'PAGE_SIZE': 5
 
-# }
+}
 AUTH_USER_MODEL = 'users.User'
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Project API',
+    'DESCRIPTION': 'project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SHEMA': False,
+    
+}
+
+
 
 
 repo = "https://github.com/nicolagardo/silabuz-DRF-VIEWS"
