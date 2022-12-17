@@ -23,7 +23,8 @@ GET (list y retrieve)
 
 POST
 
-Debe contener paginación y filtros de búsqueda para los campos de
+Debe contener paginación
+ y filtros de búsqueda para los campos de
  user__id, fecha_pago y servicio.
 
 Los servicios a usar dentro de la APP para registrar los pagos son lo siguientes:
